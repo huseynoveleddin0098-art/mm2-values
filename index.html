@@ -1,252 +1,195 @@
 <!DOCTYPE html>
-<html lang="az">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MM2Values | MM2 dəyər və trade checker</title>
     <meta
       name="description"
-      content="MM2 dəyər siyahısı, trade checker, qiymət kalkulyatoru və modern MM2 məlumatları."
+      content="SkyCast is a modern weather dashboard powered by the public Open-Meteo API."
     />
+    <title>SkyCast | Weather Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div class="page-shell">
-      <header class="topbar">
-        <div class="container nav-wrap">
-          <div class="brand">
-            <div class="brand-mark">M</div>
-            <div>
-              <span class="brand-title">MM2Values</span>
-              <small>Community Market</small>
-            </div>
-          </div>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <a class="logo" href="#top" aria-label="SkyCast home">
+          <span class="logo-mark">☼</span>
+          <span>SkyCast</span>
+        </a>
 
-          <nav class="nav">
-            <a href="#values">Dəyərlər</a>
-            <a href="#calculator">Trade Checker</a>
-            <a href="#guide">Guide</a>
-            <a href="#faq">FAQ</a>
-          </nav>
+        <nav class="side-nav" aria-label="Main navigation">
+          <a class="active" href="#top"><span>▣</span> Overview</a>
+          <a href="#forecast"><span>◷</span> Forecast</a>
+          <a href="#locations"><span>⌖</span> Locations</a>
+        </nav>
 
-          <button class="primary-btn">Live Data</button>
+        <div class="sidebar-note">
+          <span class="sun-mini">✦</span>
+          <strong>Weather for today</strong>
+          <p>Plan your day with accurate live conditions.</p>
         </div>
-      </header>
 
-      <main>
-        <section class="hero">
-          <div class="container hero-grid">
-            <div class="hero-copy">
-              <span class="eyebrow">MM2 QİYMƏTLƏRİ</span>
-              <h1>MM2 üçün modern dəyər və trade guide.</h1>
-              <p>
-                Godly, Ancient, Chroma, Pet və digər MM2 əşyalarının real bazar
-                dəyərlərini gör, trade'ləri yoxla və daha təhlükəsiz mübadilə et.
-              </p>
+        <div class="sidebar-footer">
+          Powered by <a href="https://open-meteo.com/" target="_blank" rel="noreferrer">Open-Meteo</a>
+        </div>
+      </aside>
 
-              <div class="hero-actions">
-                <a href="#values" class="primary-btn">Dəyərlərə bax</a>
-                <a href="#calculator" class="secondary-btn">Trade yoxla</a>
-              </div>
-
-              <div class="hero-metrics">
-                <div>
-                  <strong id="metric-items">0</strong>
-                  <span>Əşya</span>
-                </div>
-                <div>
-                  <strong id="metric-updated">0m</strong>
-                  <span>Yeniləmə</span>
-                </div>
-                <div>
-                  <strong>100%</strong>
-                  <span>Community</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="hero-panel">
-              <div class="panel-header">
-                <span>Live Market</span>
-                <span class="status-dot">●</span>
-              </div>
-
-              <div class="mini-list">
-                <div class="mini-item">
-                  <span>Victorious</span>
-                  <strong>2.8M</strong>
-                </div>
-                <div class="mini-item">
-                  <span>Dragon</span>
-                  <strong>3.4M</strong>
-                </div>
-                <div class="mini-item">
-                  <span>Darkmatter</span>
-                  <strong>4.9M</strong>
-                </div>
-                <div class="mini-item">
-                  <span>Frostbite</span>
-                  <strong>2.1M</strong>
-                </div>
-              </div>
-            </div>
+      <main class="main-content" id="top">
+        <header class="topbar">
+          <div>
+            <p class="overline">WEATHER DASHBOARD</p>
+            <h1>Good morning, <span>explorer.</span></h1>
           </div>
+
+          <div class="top-actions">
+            <button id="unitToggle" class="unit-toggle" type="button" aria-label="Toggle temperature unit">
+              °C <i>/</i> °F
+            </button>
+            <button id="locateBtn" class="icon-button" type="button" title="Use my location" aria-label="Use my location">
+              ⌖
+            </button>
+            <div class="avatar">SC</div>
+          </div>
+        </header>
+
+        <section class="search-row" id="locations">
+          <form id="searchForm" class="search-box">
+            <span>⌕</span>
+            <input id="cityInput" type="search" placeholder="Search for a city..." autocomplete="off" />
+            <button type="submit">Search</button>
+          </form>
+          <p id="statusMessage" class="status-message" role="status">Loading weather...</p>
         </section>
 
-        <section class="stats">
-          <div class="container stats-grid">
-            <article class="stat-card">
-              <span class="card-label">Top category</span>
-              <h3>Godlies</h3>
-              <p>Yüksək tələb və nisbi stabil qiymət.</p>
-            </article>
-            <article class="stat-card">
-              <span class="card-label">Market pulse</span>
-              <h3>Fast updates</h3>
-              <p>10 dəqiqədə bir market yenilənməsi.</p>
-            </article>
-            <article class="stat-card">
-              <span class="card-label">Safety</span>
-              <h3>Trade checks</h3>
-              <p>Scam riskini minimuma endirən al-qızdırma sistemi.</p>
-            </article>
-          </div>
-        </section>
-
-        <section id="values" class="values-section">
-          <div class="container">
-            <div class="section-head">
+        <section class="dashboard-grid" aria-live="polite">
+          <article class="current-card card" id="currentCard">
+            <div class="card-top">
               <div>
-                <span class="eyebrow">VALUE LIST</span>
-                <h2>MM2 dəyər siyahısı</h2>
+                <p class="muted">CURRENT WEATHER</p>
+                <h2 id="locationName">Loading...</h2>
+                <p id="locationMeta" class="muted">Finding your location</p>
               </div>
-              <div class="filter-panel" aria-label="Filters">
-                <input id="searchInput" type="search" placeholder="Əşya axtar..." />
-                <select id="categoryFilter">
-                  <option value="all">Hamısı</option>
-                  <option value="godly">Godly</option>
-                  <option value="ancient">Ancient</option>
-                  <option value="chroma">Chroma</option>
-                  <option value="vintage">Vintage</option>
-                  <option value="pet">Pet</option>
-                  <option value="weapon">Weapon</option>
-                </select>
+              <span id="weatherIcon" class="weather-icon">☀</span>
+            </div>
+
+            <div class="temperature">
+              <strong id="temperature">--</strong>
+              <span id="temperatureUnit">°C</span>
+            </div>
+
+            <p id="condition" class="condition">Fetching conditions...</p>
+
+            <div class="current-details">
+              <div>
+                <span>Feels like</span>
+                <strong id="feelsLike">--</strong>
+              </div>
+              <div>
+                <span>Humidity</span>
+                <strong id="humidity">--</strong>
+              </div>
+              <div>
+                <span>Wind</span>
+                <strong id="wind">--</strong>
               </div>
             </div>
 
-            <div class="table-wrap">
-              <table>
-                <thead>
-                  <tr>
-                    <th>Item</th>
-                    <th>Category</th>
-                    <th>Value</th>
-                    <th>Demand</th>
-                    <th>Stability</th>
-                  </tr>
-                </thead>
-                <tbody id="itemsTable"></tbody>
-              </table>
+            <div class="sun-row">
+              <div>
+                <span class="sunrise-icon">↑</span>
+                <div>
+                  <span>Sunrise</span>
+                  <strong id="sunrise">--</strong>
+                </div>
+              </div>
+              <div>
+                <span class="sunset-icon">↓</span>
+                <div>
+                  <span>Sunset</span>
+                  <strong id="sunset">--</strong>
+                </div>
+              </div>
             </div>
-          </div>
+          </article>
+
+          <article class="map-card card">
+            <div class="card-heading">
+              <div>
+                <p class="muted">LOCATION</p>
+                <h3>Live position</h3>
+              </div>
+              <span class="map-pin">⌖</span>
+            </div>
+
+            <div class="map-visual">
+              <div class="map-grid-lines"></div>
+              <div class="map-orbit orbit-one"></div>
+              <div class="map-orbit orbit-two"></div>
+              <div class="map-dot"><span></span></div>
+              <div class="map-label" id="mapLabel">Local area</div>
+            </div>
+
+            <div class="coordinates">
+              <span>LATITUDE <b id="latitude">--</b></span>
+              <span>LONGITUDE <b id="longitude">--</b></span>
+            </div>
+          </article>
+
+          <article class="hourly-card card" id="forecast">
+            <div class="card-heading">
+              <div>
+                <p class="muted">TODAY'S FORECAST</p>
+                <h3>Hourly outlook</h3>
+              </div>
+              <span class="date-label" id="dateLabel">--</span>
+            </div>
+            <div class="hourly-list" id="hourlyList"></div>
+          </article>
         </section>
 
-        <section id="calculator" class="calculator-section">
-          <div class="container calculator-grid">
-            <div class="calc-copy">
-              <span class="eyebrow">TRADE CHECKER</span>
-              <h2>Trade balansını yoxla</h2>
-              <p>
-                İki tərəfin item dəyərini daxil et və mübadilənin "win", "fair" və
-                ya "lose" olub-olmadığını gör.
-              </p>
+        <section class="section-block">
+          <div class="section-heading">
+            <div>
+              <p class="overline">NEXT 7 DAYS</p>
+              <h2>Weekly forecast</h2>
             </div>
-
-            <div class="calc-card">
-              <div class="calc-row">
-                <label for="myItem">Mənim item</label>
-                <select id="myItem"></select>
-              </div>
-
-              <div class="calc-row">
-                <label for="theirItem">Onların item</label>
-                <select id="theirItem"></select>
-              </div>
-
-              <button id="calcBtn" class="primary-btn full">Calculate</button>
-
-              <div id="tradeResult" class="trade-result">
-                <span class="label">Nəticə</span>
-                <strong>Hazırdır</strong>
-                <small>İki qiyməti seç və yoxla.</small>
-              </div>
-            </div>
+            <button id="refreshBtn" class="refresh-btn" type="button">↻ Refresh data</button>
           </div>
+          <div class="weekly-grid" id="weeklyGrid"></div>
         </section>
 
-        <section id="guide" class="guide-section">
-          <div class="container">
-            <span class="eyebrow">GUIDE</span>
-            <h2>Safe trading tips</h2>
-
-            <div class="guide-grid">
-              <article>
-                <h3>1. Dəyəri yoxla</h3>
-                <p>Hər item üçün market qiymətləri ilə razılaş və uyğunluğa diqqət et.</p>
-              </article>
-              <article>
-                <h3>2. Fair trade-et</h3>
-                <p>Trade checker ilə balansı yoxla. “Fair” dəyər daha güvenli seçimdir.</p>
-              </article>
-              <article>
-                <h3>3. Təhlükəsizliğe diqqət et</h3>
-                <p>Gizli tələb, ani təzyiq və scam trigger'lar qərəzsiz mübadiləni dayandıra bilər.</p>
-              </article>
-            </div>
-          </div>
-        </section>
-
-        <section id="faq" class="faq-section">
-          <div class="container faq-wrap">
-            <span class="eyebrow">FAQ</span>
-            <h2>Ən çox soruşulanlar</h2>
-
-            <div class="faq-list">
-              <div class="faq-item">
-                <h3>Bu sayt real market data verir?</h3>
-                <p>Bu demo versiyasında community-style sample data istifadə olunur. Real API üçün backend əlaqələndirilməsi lazımdır.</p>
-              </div>
-              <div class="faq-item">
-                <h3>Trade checker necə işləyir?</h3>
-                <p>Hər item üçün dəyəri yükləyib iki tərəf arasında fərqi hesablayır və nəticəni göstərir.</p>
-              </div>
-              <div class="faq-item">
-                <h3>Mobil cihazlar üçün uyğun?</h3>
-                <p>Bəli. Tam responsiv dizayn hazırlanıb.</p>
-              </div>
-            </div>
-          </div>
-        </section>
+        <footer class="footer">
+          Weather data provided by <a href="https://open-meteo.com/" target="_blank" rel="noreferrer">Open-Meteo.com</a>
+          · No API key required
+        </footer>
       </main>
-
-      <footer class="footer">
-        <div class="container footer-wrap">
-          <p>© 2026 MM2Values</p>
-          <div class="footer-links">
-            <a href="#values">Values</a>
-            <a href="#calculator">Checker</a>
-            <a href="#guide">Guide</a>
-          </div>
-        </div>
-      </footer>
     </div>
 
     <script src="app.js"></script>
   </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
