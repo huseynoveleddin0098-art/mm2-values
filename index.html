@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="az">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MM2Values | MM2 dəyər və trade checker</title>
+    <meta
+      name="description"
+      content="MM2 dəyər siyahısı, trade checker, qiymət kalkulyatoru və modern MM2 məlumatları."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="topbar">
+        <div class="container nav-wrap">
+          <div class="brand">
+            <div class="brand-mark">M</div>
+            <div>
+              <span class="brand-title">MM2Values</span>
+              <small>Community Market</small>
+            </div>
+          </div>
+
+          <nav class="nav">
+            <a href="#values">Dəyərlər</a>
+            <a href="#calculator">Trade Checker</a>
+            <a href="#guide">Guide</a>
+            <a href="#faq">FAQ</a>
+          </nav>
+
+          <button class="primary-btn">Live Data</button>
+        </div>
+      </header>
+
+      <main>
+        <section class="hero">
+          <div class="container hero-grid">
+            <div class="hero-copy">
+              <span class="eyebrow">MM2 QİYMƏTLƏRİ</span>
+              <h1>MM2 üçün modern dəyər və trade guide.</h1>
+              <p>
+                Godly, Ancient, Chroma, Pet və digər MM2 əşyalarının real bazar
+                dəyərlərini gör, trade'ləri yoxla və daha təhlükəsiz mübadilə et.
+              </p>
+
+              <div class="hero-actions">
+                <a href="#values" class="primary-btn">Dəyərlərə bax</a>
+                <a href="#calculator" class="secondary-btn">Trade yoxla</a>
+              </div>
+
+              <div class="hero-metrics">
+                <div>
+                  <strong id="metric-items">0</strong>
+                  <span>Əşya</span>
+                </div>
+                <div>
+                  <strong id="metric-updated">0m</strong>
+                  <span>Yeniləmə</span>
+                </div>
+                <div>
+                  <strong>100%</strong>
+                  <span>Community</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="hero-panel">
+              <div class="panel-header">
+                <span>Live Market</span>
+                <span class="status-dot">●</span>
+              </div>
+
+              <div class="mini-list">
+                <div class="mini-item">
+                  <span>Victorious</span>
+                  <strong>2.8M</strong>
+                </div>
+                <div class="mini-item">
+                  <span>Dragon</span>
+                  <strong>3.4M</strong>
+                </div>
+                <div class="mini-item">
+                  <span>Darkmatter</span>
+                  <strong>4.9M</strong>
+                </div>
+                <div class="mini-item">
+                  <span>Frostbite</span>
+                  <strong>2.1M</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="stats">
+          <div class="container stats-grid">
+            <article class="stat-card">
+              <span class="card-label">Top category</span>
+              <h3>Godlies</h3>
+              <p>Yüksək tələb və nisbi stabil qiymət.</p>
+            </article>
+            <article class="stat-card">
+              <span class="card-label">Market pulse</span>
+              <h3>Fast updates</h3>
+              <p>10 dəqiqədə bir market yenilənməsi.</p>
+            </article>
+            <article class="stat-card">
+              <span class="card-label">Safety</span>
+              <h3>Trade checks</h3>
+              <p>Scam riskini minimuma endirən al-qızdırma sistemi.</p>
+            </article>
+          </div>
+        </section>
+
+        <section id="values" class="values-section">
+          <div class="container">
+            <div class="section-head">
+              <div>
+                <span class="eyebrow">VALUE LIST</span>
+                <h2>MM2 dəyər siyahısı</h2>
+              </div>
+              <div class="filter-panel" aria-label="Filters">
+                <input id="searchInput" type="search" placeholder="Əşya axtar..." />
+                <select id="categoryFilter">
+                  <option value="all">Hamısı</option>
+                  <option value="godly">Godly</option>
+                  <option value="ancient">Ancient</option>
+                  <option value="chroma">Chroma</option>
+                  <option value="vintage">Vintage</option>
+                  <option value="pet">Pet</option>
+                  <option value="weapon">Weapon</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Item</th>
+                    <th>Category</th>
+                    <th>Value</th>
+                    <th>Demand</th>
+                    <th>Stability</th>
+                  </tr>
+                </thead>
+                <tbody id="itemsTable"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <section id="calculator" class="calculator-section">
+          <div class="container calculator-grid">
+            <div class="calc-copy">
+              <span class="eyebrow">TRADE CHECKER</span>
+              <h2>Trade balansını yoxla</h2>
+              <p>
+                İki tərəfin item dəyərini daxil et və mübadilənin "win", "fair" və
+                ya "lose" olub-olmadığını gör.
+              </p>
+            </div>
+
+            <div class="calc-card">
+              <div class="calc-row">
+                <label for="myItem">Mənim item</label>
+                <select id="myItem"></select>
+              </div>
+
+              <div class="calc-row">
+                <label for="theirItem">Onların item</label>
+                <select id="theirItem"></select>
+              </div>
+
+              <button id="calcBtn" class="primary-btn full">Calculate</button>
+
+              <div id="tradeResult" class="trade-result">
+                <span class="label">Nəticə</span>
+                <strong>Hazırdır</strong>
+                <small>İki qiyməti seç və yoxla.</small>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="guide" class="guide-section">
+          <div class="container">
+            <span class="eyebrow">GUIDE</span>
+            <h2>Safe trading tips</h2>
+
+            <div class="guide-grid">
+              <article>
+                <h3>1. Dəyəri yoxla</h3>
+                <p>Hər item üçün market qiymətləri ilə razılaş və uyğunluğa diqqət et.</p>
+              </article>
+              <article>
+                <h3>2. Fair trade-et</h3>
+                <p>Trade checker ilə balansı yoxla. “Fair” dəyər daha güvenli seçimdir.</p>
+              </article>
+              <article>
+                <h3>3. Təhlükəsizliğe diqqət et</h3>
+                <p>Gizli tələb, ani təzyiq və scam trigger'lar qərəzsiz mübadiləni dayandıra bilər.</p>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section id="faq" class="faq-section">
+          <div class="container faq-wrap">
+            <span class="eyebrow">FAQ</span>
+            <h2>Ən çox soruşulanlar</h2>
+
+            <div class="faq-list">
+              <div class="faq-item">
+                <h3>Bu sayt real market data verir?</h3>
+                <p>Bu demo versiyasında community-style sample data istifadə olunur. Real API üçün backend əlaqələndirilməsi lazımdır.</p>
+              </div>
+              <div class="faq-item">
+                <h3>Trade checker necə işləyir?</h3>
+                <p>Hər item üçün dəyəri yükləyib iki tərəf arasında fərqi hesablayır və nəticəni göstərir.</p>
+              </div>
+              <div class="faq-item">
+                <h3>Mobil cihazlar üçün uyğun?</h3>
+                <p>Bəli. Tam responsiv dizayn hazırlanıb.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <div class="container footer-wrap">
+          <p>© 2026 MM2Values</p>
+          <div class="footer-links">
+            <a href="#values">Values</a>
+            <a href="#calculator">Checker</a>
+            <a href="#guide">Guide</a>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
