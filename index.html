@@ -5,191 +5,292 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="SkyCast is a modern weather dashboard powered by the public Open-Meteo API."
+      content="MM2Values is a modern community-driven MM2 values dashboard with live-style pricing, trading checks, and admin tools."
     />
-    <title>SkyCast | Weather Dashboard</title>
+    <title>MM2Values | MM2 Trade Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div class="app-shell">
-      <aside class="sidebar">
-        <a class="logo" href="#top" aria-label="SkyCast home">
-          <span class="logo-mark">☼</span>
-          <span>SkyCast</span>
-        </a>
-
-        <nav class="side-nav" aria-label="Main navigation">
-          <a class="active" href="#top"><span>▣</span> Overview</a>
-          <a href="#forecast"><span>◷</span> Forecast</a>
-          <a href="#locations"><span>⌖</span> Locations</a>
-        </nav>
-
-        <div class="sidebar-note">
-          <span class="sun-mini">✦</span>
-          <strong>Weather for today</strong>
-          <p>Plan your day with accurate live conditions.</p>
-        </div>
-
-        <div class="sidebar-footer">
-          Powered by <a href="https://open-meteo.com/" target="_blank" rel="noreferrer">Open-Meteo</a>
-        </div>
-      </aside>
-
-      <main class="main-content" id="top">
-        <header class="topbar">
-          <div>
-            <p class="overline">WEATHER DASHBOARD</p>
-            <h1>Good morning, <span>explorer.</span></h1>
-          </div>
-
-          <div class="top-actions">
-            <button id="unitToggle" class="unit-toggle" type="button" aria-label="Toggle temperature unit">
-              °C <i>/</i> °F
-            </button>
-            <button id="locateBtn" class="icon-button" type="button" title="Use my location" aria-label="Use my location">
-              ⌖
-            </button>
-            <div class="avatar">SC</div>
-          </div>
-        </header>
-
-        <section class="search-row" id="locations">
-          <form id="searchForm" class="search-box">
-            <span>⌕</span>
-            <input id="cityInput" type="search" placeholder="Search for a city..." autocomplete="off" />
-            <button type="submit">Search</button>
-          </form>
-          <p id="statusMessage" class="status-message" role="status">Loading weather...</p>
-        </section>
-
-        <section class="dashboard-grid" aria-live="polite">
-          <article class="current-card card" id="currentCard">
-            <div class="card-top">
-              <div>
-                <p class="muted">CURRENT WEATHER</p>
-                <h2 id="locationName">Loading...</h2>
-                <p id="locationMeta" class="muted">Finding your location</p>
-              </div>
-              <span id="weatherIcon" class="weather-icon">☀</span>
-            </div>
-
-            <div class="temperature">
-              <strong id="temperature">--</strong>
-              <span id="temperatureUnit">°C</span>
-            </div>
-
-            <p id="condition" class="condition">Fetching conditions...</p>
-
-            <div class="current-details">
-              <div>
-                <span>Feels like</span>
-                <strong id="feelsLike">--</strong>
-              </div>
-              <div>
-                <span>Humidity</span>
-                <strong id="humidity">--</strong>
-              </div>
-              <div>
-                <span>Wind</span>
-                <strong id="wind">--</strong>
-              </div>
-            </div>
-
-            <div class="sun-row">
-              <div>
-                <span class="sunrise-icon">↑</span>
-                <div>
-                  <span>Sunrise</span>
-                  <strong id="sunrise">--</strong>
-                </div>
-              </div>
-              <div>
-                <span class="sunset-icon">↓</span>
-                <div>
-                  <span>Sunset</span>
-                  <strong id="sunset">--</strong>
-                </div>
-              </div>
-            </div>
-          </article>
-
-          <article class="map-card card">
-            <div class="card-heading">
-              <div>
-                <p class="muted">LOCATION</p>
-                <h3>Live position</h3>
-              </div>
-              <span class="map-pin">⌖</span>
-            </div>
-
-            <div class="map-visual">
-              <div class="map-grid-lines"></div>
-              <div class="map-orbit orbit-one"></div>
-              <div class="map-orbit orbit-two"></div>
-              <div class="map-dot"><span></span></div>
-              <div class="map-label" id="mapLabel">Local area</div>
-            </div>
-
-            <div class="coordinates">
-              <span>LATITUDE <b id="latitude">--</b></span>
-              <span>LONGITUDE <b id="longitude">--</b></span>
-            </div>
-          </article>
-
-          <article class="hourly-card card" id="forecast">
-            <div class="card-heading">
-              <div>
-                <p class="muted">TODAY'S FORECAST</p>
-                <h3>Hourly outlook</h3>
-              </div>
-              <span class="date-label" id="dateLabel">--</span>
-            </div>
-            <div class="hourly-list" id="hourlyList"></div>
-          </article>
-        </section>
-
-        <section class="section-block">
-          <div class="section-heading">
+    <div class="page-shell">
+      <header class="topbar">
+        <div class="container nav-wrap">
+          <div class="brand" aria-label="MM2Values home">
+            <div class="brand-mark">M</div>
             <div>
-              <p class="overline">NEXT 7 DAYS</p>
-              <h2>Weekly forecast</h2>
+              <span class="brand-title">MM2Values</span>
+              <small>Community Market</small>
             </div>
-            <button id="refreshBtn" class="refresh-btn" type="button">↻ Refresh data</button>
           </div>
-          <div class="weekly-grid" id="weeklyGrid"></div>
+
+          <nav class="nav" aria-label="Main navigation">
+            <a href="#values">Values</a>
+            <a href="#calculator">Trade Checker</a>
+            <a href="#admin">Admin</a>
+            <a href="#faq">FAQ</a>
+          </nav>
+
+          <button class="primary-btn" type="button">Live Values</button>
+        </div>
+      </header>
+
+      <main>
+        <section class="hero">
+          <div class="container hero-grid">
+            <div class="hero-copy">
+              <span class="eyebrow">MM2 MARKET</span>
+              <h1>MM2 dəyər siyahısı və trade checker.</h1>
+              <p>
+                Godly, Ancient, Chroma, Vintage, Pet və digər MM2 əşyalarının real bazar
+                hissəsini özündə cəmləşdirən modern market paneli.
+              </p>
+
+              <div class="hero-actions">
+                <a href="#values" class="primary-btn">Value List</a>
+                <a href="#calculator" class="secondary-btn">Trade Check</a>
+              </div>
+
+              <div class="hero-metrics">
+                <div>
+                  <strong id="metricItems">0</strong>
+                  <span>Items</span>
+                </div>
+                <div>
+                  <strong id="metricCategories">0</strong>
+                  <span>Categories</span>
+                </div>
+                <div>
+                  <strong id="metricUpdated">Live</strong>
+                  <span>Market</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="hero-panel">
+              <div class="panel-header">
+                <span>Trending Values</span>
+                <span class="status-dot">●</span>
+              </div>
+
+              <div class="mini-list" id="trendingList"></div>
+            </div>
+          </div>
         </section>
 
-        <footer class="footer">
-          Weather data provided by <a href="https://open-meteo.com/" target="_blank" rel="noreferrer">Open-Meteo.com</a>
-          · No API key required
-        </footer>
+        <section class="stats">
+          <div class="container stats-grid">
+            <article class="stat-card">
+              <span class="card-label">Top Category</span>
+              <h3 id="topCategory">Godly</h3>
+              <p>High demand items dominate the market.</p>
+            </article>
+            <article class="stat-card">
+              <span class="card-label">Average Value</span>
+              <h3 id="avgValue">0</h3>
+              <p>Average price across tracked items.</p>
+            </article>
+            <article class="stat-card">
+              <span class="card-label">Trade Safety</span>
+              <h3>Better checks</h3>
+              <p>Compare both sides before accepting offers.</p>
+            </article>
+          </div>
+        </section>
+
+        <section id="values" class="values-section">
+          <div class="container">
+            <div class="section-head">
+              <div>
+                <span class="eyebrow">VALUE LIST</span>
+                <h2>MM2 item values</h2>
+              </div>
+
+              <div class="filter-panel" aria-label="Filters">
+                <input id="searchInput" type="search" placeholder="Search item..." />
+                <select id="categoryFilter">
+                  <option value="all">All categories</option>
+                  <option value="godly">Godly</option>
+                  <option value="ancient">Ancient</option>
+                  <option value="chroma">Chroma</option>
+                  <option value="vintage">Vintage</option>
+                  <option value="pet">Pet</option>
+                  <option value="weapon">Weapon</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Item</th>
+                    <th>Category</th>
+                    <th>Value</th>
+                    <th>Demand</th>
+                    <th>Stability</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="itemsTable"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <section id="calculator" class="calculator-section">
+          <div class="container calculator-grid">
+            <div class="calc-copy">
+              <span class="eyebrow">TRADE CHECKER</span>
+              <h2>Compare trades</h2>
+              <p>
+                Choose two items and get a fast result: Win, Fair, or Lose. This helps spot unfair or risky trades quickly.
+              </p>
+            </div>
+
+            <div class="calc-card">
+              <div class="calc-row">
+                <label for="myItem">My item</label>
+                <select id="myItem"></select>
+              </div>
+
+              <div class="calc-row">
+                <label for="theirItem">Their item</label>
+                <select id="theirItem"></select>
+              </div>
+
+              <button id="calcBtn" class="primary-btn full" type="button">Check Trade</button>
+
+              <div id="tradeResult" class="trade-result">
+                <span class="label">Result</span>
+                <strong>Ready</strong>
+                <small>Select two items to compare.</small>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="admin" class="admin-section">
+          <div class="container admin-wrap">
+            <div class="section-head admin-head">
+              <div>
+                <span class="eyebrow">ADMIN</span>
+                <h2>Manage values</h2>
+              </div>
+            </div>
+
+            <div class="admin-grid">
+              <form id="adminForm" class="admin-form">
+                <div class="form-row">
+                  <label for="itemName">Item name</label>
+                  <input id="itemName" name="itemName" type="text" placeholder="e.g. Victorious" required />
+                </div>
+
+                <div class="form-row half-grid">
+                  <div>
+                    <label for="itemCategory">Category</label>
+                    <select id="itemCategory" name="itemCategory">
+                      <option value="godly">Godly</option>
+                      <option value="ancient">Ancient</option>
+                      <option value="chroma">Chroma</option>
+                      <option value="vintage">Vintage</option>
+                      <option value="pet">Pet</option>
+                      <option value="weapon">Weapon</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label for="itemValue">Value</label>
+                    <input id="itemValue" name="itemValue" type="number" min="0" step="1000" placeholder="2500000" required />
+                  </div>
+                </div>
+
+                <div class="form-row half-grid">
+                  <div>
+                    <label for="itemDemand">Demand</label>
+                    <select id="itemDemand" name="itemDemand">
+                      <option value="Low">Low</option>
+                      <option value="Medium">Medium</option>
+                      <option value="High">High</option>
+                      <option value="Very High">Very High</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label for="itemStability">Stability</label>
+                    <select id="itemStability" name="itemStability">
+                      <option value="Stable">Stable</option>
+                      <option value="Very Stable">Very Stable</option>
+                      <option value="Moderate">Moderate</option>
+                    </select>
+                  </div>
+                </div>
+
+                <input id="itemId" type="hidden" />
+
+                <div class="form-actions">
+                  <button class="primary-btn" type="submit">Save Item</button>
+                  <button class="secondary-btn" id="resetForm" type="button">Reset</button>
+                </div>
+              </form>
+
+              <div class="admin-summary">
+                <div class="summary-card">
+                  <span class="card-label">Total items</span>
+                  <h3 id="summaryTotal">0</h3>
+                </div>
+                <div class="summary-card">
+                  <span class="card-label">Highest value</span>
+                  <h3 id="summaryTop">0</h3>
+                </div>
+                <div class="summary-card">
+                  <span class="card-label">Market notes</span>
+                  <p>Use this panel to update values fast when the market shifts.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="faq" class="faq-section">
+          <div class="container faq-wrap">
+            <span class="eyebrow">FAQ</span>
+            <h2>Frequently asked questions</h2>
+
+            <div class="faq-list">
+              <div class="faq-item">
+                <h3>Does this use real MM2 live data?</h3>
+                <p>This version uses a local dataset and storage-based admin editing to simulate a working community values dashboard.</p>
+              </div>
+              <div class="faq-item">
+                <h3>Can I add custom items?</h3>
+                <p>Yes. Use the Admin section to create or edit any MM2 item and value.</p>
+              </div>
+              <div class="faq-item">
+                <h3>Can I compare offers?</h3>
+                <p>Yes, the Trade Checker calculates a quick balanced result between two selected items.</p>
+              </div>
+            </div>
+          </div>
+        </section>
       </main>
+
+      <footer class="footer">
+        <div class="container footer-wrap">
+          <p>© 2026 MM2Values</p>
+          <div class="footer-links">
+            <a href="#values">Values</a>
+            <a href="#calculator">Checker</a>
+            <a href="#admin">Admin</a>
+          </div>
+        </div>
+      </footer>
     </div>
 
     <script src="app.js"></script>
   </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
